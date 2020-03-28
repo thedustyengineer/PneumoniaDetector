@@ -4,16 +4,16 @@ from pdetect_perturbations import Perturbations as pb
 
 def test_rotate_image():
     '''
-    Call rotate_image on the test image and rotate the image 5 times and save the result.
+    Call rotate_image on the test image and rotate the image 5 times and save the results.
     '''
     test_img = cv2.imread('test_image.jpeg')
     test_img = cv2.cvtColor(test_img, cv2.COLOR_BGR2GRAY)
     if test_img is None:
         print('Image is None')
-    degres = [np.random.uniform(-5, 5) for i in range(5)]
-    for i in degres:
+    degrees = [np.random.uniform(-5, 5) for i in range(5)]
+    for i in degrees:
         test_img = pb.rotate_image(test_img, i)
-    cv2.imwrite('rotated_img.jpeg', test_img)
+        cv2.imwrite('rotated_img_' + str(i) +'.jpeg', test_img)
 
 def test_sp_noise():
     '''
@@ -42,5 +42,7 @@ def test_gauss_noise():
     cv2.imwrite('test_low_gauss_noise.jpg',low_noise_img)
 
 
+
+test_rotate_image()
 test_sp_noise()
 test_gauss_noise()
