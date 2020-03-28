@@ -4,8 +4,26 @@ import cv2
 class Perturbations:
 
     @staticmethod
-    def rotate_image(image, rot_val):
-        return
+        def rotate_image(image, rot_val):
+        '''
+        Rotate an image.
+
+        Parameters
+        ----------
+        image: OpenCV image
+            An OpenCV image (i.e. read with imread)
+        degree: float
+            The amount of degree to rotate
+        
+        Returns
+        -------
+        OpenCV image
+            The input image but with salt and pepper noise applied
+        '''
+        rows, cols = image.shape
+        matrix = cv2.getRotationMatrix2D((rows/2, cols/2), rot_val, 1)
+        new_img = cv2.warpAffine(image, matrix, (cols,rows))
+        return new_img
 
     @staticmethod
     def adjust_brightness(image, brightness):
