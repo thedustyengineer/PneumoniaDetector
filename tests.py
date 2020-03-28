@@ -2,6 +2,18 @@ import numpy as np
 import cv2
 from pdetect_perturbations import Perturbations as pb
 
+def test_rotate_image():
+    '''
+    Call rotate_image on the test image and rotate the image 5 times and save the result.
+    '''
+    test_img = cv2.imread('test_image.jpeg')
+    test_img = cv2.cvtColor(test_img, cv2.COLOR_BGR2GRAY)
+    if test_img is None:
+        print('Image is None')
+    degres = [np.random.uniform(-5, 5) for i in range(5)]
+    for i in degres:
+        test_img = pb.rotate_image(test_img, i)
+    cv2.imwrite('rotated_img.jpeg', test_img)
 
 def test_sp_noise():
     '''
