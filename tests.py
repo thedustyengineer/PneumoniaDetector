@@ -42,7 +42,18 @@ def test_gauss_noise():
     cv2.imwrite('test_low_gauss_noise.jpg',low_noise_img)
 
 
+def test_adjust_brightness():
+    test_img = cv2.imread('test_image.jpeg')
+    if test_img is None:
+        print('Image is None')
+    img_file_index = 0    
+    for i in range(-10, 10, 3):
+        brightned_img = pb.adjust_brightness(test_img, i)
+        img_file_index = img_file_index + 1
+        cv2.imwrite('brightned_img' + str(img_file_index) + '.jpg', brightned_img)
 
+
+test_adjust_brightness()
 test_rotate_image()
 test_sp_noise()
 test_gauss_noise()
