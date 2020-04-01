@@ -5,7 +5,24 @@ class Perturbations:
 
     @staticmethod
     def adjust_brightness(image, brightness):
-        return
+        '''
+        Adjust brightness of an image.
+
+        Parameters
+        ----------
+        image: OpenCV image
+            An OpenCV image (i.e. read with imread)
+            brightness: constant int
+            The number of pixel changes
+        
+        Returns
+        -------
+        OpenCV image
+            The input image with more accent on brightness depending on the pixel value added
+        '''
+        brightned_img = np.where((255 - image) < brightness, 255, image + brightness)
+        brightned_img = image + brightness
+        return brightned_img
 
     @staticmethod
     def rotate_image(image, rot_val):
