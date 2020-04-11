@@ -4,6 +4,27 @@ import cv2
 class Perturbations:
 
     @staticmethod
+    def pad_image(image, x_pix, y_pix):
+        '''
+                Pad an image.
+
+                Parameters
+                ----------
+                image: OpenCV image
+                    An OpenCV image (i.e. read with imread)
+                x_pix: int
+                    The number of pixels to add to top & bottom
+                y_pix: int
+                    The number of pixels to add to left & right
+                Returns
+                -------
+                OpenCV image
+                    The padded input image
+                '''
+        padded_img = cv2.copyMakeBorder(image, x_pix, x_pix, y_pix, y_pix, cv2.BORDER_CONSTANT, value=0)
+        return padded_img
+    
+    @staticmethod
     def adjust_brightness(image, brightness):
         '''
         Adjust brightness of an image.
