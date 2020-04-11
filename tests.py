@@ -2,6 +2,17 @@ import numpy as np
 import cv2
 from pdetect_perturbations import Perturbations as pb
 
+def test_pad_image():
+    '''
+    Call pad_image on the test image to pad an image and save the results.
+    '''
+    test_img = cv2.imread('test_image.jpeg')
+    test_img = cv2.cvtColor(test_img, cv2.COLOR_BGR2GRAY)
+    if test_img is None:
+        print('Image is None')
+    test_img = pb.pad_image(test_img, 50, 50)
+    cv2.imwrite('padded_img.jpeg', test_img)
+
 def test_rotate_image():
     '''
     Call rotate_image on the test image and rotate the image 5 times and save the results.
@@ -57,3 +68,4 @@ test_adjust_brightness()
 test_rotate_image()
 test_sp_noise()
 test_gauss_noise()
+test_pad_image()
