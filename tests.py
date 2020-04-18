@@ -54,6 +54,9 @@ def test_gauss_noise():
 
 
 def test_adjust_brightness():
+    '''
+    Call adjust_brightness on the test image and save the result to file
+    '''
     test_img = cv2.imread('test_image.jpeg')
     if test_img is None:
         print('Image is None')
@@ -61,11 +64,29 @@ def test_adjust_brightness():
     for i in range(-10, 10, 3):
         brightned_img = pb.adjust_brightness(test_img, i)
         img_file_index = img_file_index + 1
-        cv2.imwrite('brightned_img' + str(img_file_index) + '.jpg', brightned_img)
+        cv2.imwrite('test_brightned_img' + str(img_file_index) + '.jpg', brightned_img)
 
+def test_mirror_image():
+    '''
+    Call mirror_image on the test image and save the result to file
+    '''
+    test_img = cv2.imread('test_image.jpeg')
+    mirrored_image = pb.mirror_image(test_img)
+    cv2.imwrite('mirrored_image' + '.jpg', mirrored_image)
 
-test_adjust_brightness()
-test_rotate_image()
-test_sp_noise()
-test_gauss_noise()
-test_pad_image()
+def test_resize_image():
+    '''
+    Call resize_image on the test image then pad to 256 x 256 and save the result to file
+    '''
+    test_img = cv2.imread('test_image.jpeg')
+    mirrored_image = pb.resize_image(test_img, 256)
+    mirrored_image = pb.pad_image(mirrored_image, 256, 256)
+    cv2.imwrite('mirrored_image' + '.jpg', mirrored_image)
+
+#test_adjust_brightness()
+#test_rotate_image()
+#test_sp_noise()
+#test_gauss_noise()
+#test_pad_image()
+#test_mirror_image()
+test_resize_image()
