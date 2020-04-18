@@ -79,9 +79,10 @@ def test_resize_image():
     Call resize_image on the test image then pad to 256 x 256 and save the result to file
     '''
     test_img = cv2.imread('test_image.jpeg')
-    mirrored_image = pb.resize_image(test_img, 256)
-    mirrored_image = pb.pad_image(mirrored_image, 256, 256)
-    cv2.imwrite('mirrored_image' + '.jpg', mirrored_image)
+    resized_image = pb.resize_image(test_img, 256)
+    cv2.imwrite('resized_image' + '.jpg', resized_image)
+    resized_image = pb.pad_image(resized_image, 256, 256)
+    cv2.imwrite('resized_padded_image' + '.jpg', resized_image)
 
 #test_adjust_brightness()
 #test_rotate_image()
