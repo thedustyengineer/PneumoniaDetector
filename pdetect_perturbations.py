@@ -39,7 +39,8 @@ class Perturbations:
     @staticmethod
     def pad_image(image, x_pix, y_pix):
         '''
-        Pad an image.
+        Pad an image to the desired x and y dimensions
+        Input image must be equal to or smaller in x and y than the specified dims
 
         Parameters
         ----------
@@ -54,8 +55,26 @@ class Perturbations:
         OpenCV image
             The padded input image
         '''
-        padded_img = cv2.copyMakeBorder(image, x_pix, x_pix, y_pix, y_pix, cv2.BORDER_CONSTANT, value=0)
+        assert x_pix >= image.shape[1]
+        assert y_pix >= image.shape[0]
+        x_padding = int((x_pix - image.shape[1])/2)
+        y_padding = int((y_pix - image.shape[0])/2)
+
+        padded_img = cv2.copyMakeBorder(image, y_padding, y_padding, x_padding, x_padding, cv2.BORDER_CONSTANT, value=0)
+        x_diff = x_pix - padded_img.shape[1]
+        y_diff = y_pix - padded_img.shape[0]
+
+        # if there is a difference it is because the required 
+        # padding isn't symmetric; we must add pixels as 
+        # appropriate to reach correct resolution on only
+        # on side of the image
+
+        padded_img = cv2.copyMakeBorder(padded_img, y_diff, 0, x_diff, 0, cv2.BORDER_CONSTANT, value=0)
+
+
+
         return padded_img
+        
     
     @staticmethod
     def adjust_brightness(image, brightness):
