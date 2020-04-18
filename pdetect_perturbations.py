@@ -4,23 +4,56 @@ import cv2
 class Perturbations:
 
     @staticmethod
+    def resize_image(image, max_1d_res):
+        '''
+        Resize an image proportionally based on a 
+        new maximum res value for the larger dimension
+
+        Parameters
+        ----------
+        image: OpenCV image
+            An OpenCV image (i.e. read with imread)
+
+        mrax_1d_res: int
+            The maximum resolution of any one dimension
+            (the smaller dimension will scale proportionally)
+            
+        Returns
+        -------
+        OpenCV image
+            The resized input image
+        '''
+        x = None
+        y = None
+
+        if image.shape[0] > image.shape[1]: # if y > x
+            y = max_1d_res
+        else:
+            x = max_1d_res
+
+        width = x or int(image.shape[1] * (y/image.shape[0]))
+        height = y or int(image.shape[0] * (x/image.shape[1]))
+        resized = cv2.resize(image, (width, height), interpolation=cv2.INTER_AREA)
+        return resized
+
+    @staticmethod
     def pad_image(image, x_pix, y_pix):
         '''
-                Pad an image.
+        Pad an image.
 
-                Parameters
-                ----------
-                image: OpenCV image
-                    An OpenCV image (i.e. read with imread)
-                x_pix: int
-                    The number of pixels to add to top & bottom
-                y_pix: int
-                    The number of pixels to add to left & right
-                Returns
-                -------
-                OpenCV image
-                    The padded input image
-                '''
+        Parameters
+        ----------
+        image: OpenCV image
+            An OpenCV image (i.e. read with imread)
+        x_pix: int
+            The desired x-dimension in pixels
+        y_pix: int
+            The desired y-dimension in pixels
+        Returns
+        -------
+        OpenCV image
+            The padded input image
+        '''
         padded_img = cv2.copyMakeBorder(image, x_pix, x_pix, y_pix, y_pix, cv2.BORDER_CONSTANT, value=0)
         return padded_img
     
@@ -123,3 +156,23 @@ class Perturbations:
         noisy_img = noisy_img.reshape(row,col)
         noisy_out = image + noisy_img
         return noisy_out
+
+    @staticmethod
+    def mirror_image(image, axis=1):
+        '''
+        Mirrors an image over the specified axis 
+        (0 - vertical, 1 - horizontal)
+
+        Parameters
+        ----------
+        image: OpenCV image
+            An OpenCV image (i.e. read with imread)
+        
+        Returns
+        -------
+        OpenCV image
+            The input image but with gaussian noise applied
+        '''
+
+        flipped_image = cv2.flip(image,axis)
+        return flipped_image
