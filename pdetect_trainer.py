@@ -23,6 +23,9 @@ from keras.models import load_model, Model
 import random
 
 random.seed(a=None, version=2)
+
+# you will need to download the numpy binaries from sharepoint and
+# put them in the same directory as this file to run this
 x_train_path = 'x_train.npy'
 y_train_path = 'y_train.npy'
 
@@ -76,6 +79,8 @@ callbacks_list = [
     batchLogCallback
 ]
 
+# you will need to download the numpy binaries from sharepoint and
+# put them in the same directory as this file to run this
 x_train = np.asarray(np.load(x_train_path))
 y_train = np.asarray(np.load(y_train_path))
 
