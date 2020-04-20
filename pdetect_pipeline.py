@@ -119,9 +119,9 @@ def build_save_np_binary(input_dir, output_dir, output_prefix):
         image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
         if (('normal' in file) or ('NORMAL' in file) or (('bacteria' not in file) and ('virus' not in file))):
-            y_train.append('normal')
+            y_train.append(0)
         else:
-            y_train.append('pneumonia')
+            y_train.append(1)
 
         x_train.append(image)
 
@@ -138,4 +138,4 @@ def build_save_np_binary(input_dir, output_dir, output_prefix):
 
 #augment_data_set('/Volumes/Storage/chest_xray/chest_xray/test','/Volumes/Storage/chest_xray/chest_xray/test_resized')
 
-#build_save_np_binary('/Volumes/Storage/chest_xray/chest_xray/test_resized','/Volumes/Storage/chest_xray/chest_xray/test_resized/binaries','test')
+build_save_np_binary('/Volumes/Storage/chest_xray/chest_xray/test_resized','/Volumes/Storage/chest_xray/chest_xray/test_resized/binaries','test')
