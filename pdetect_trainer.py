@@ -48,7 +48,7 @@ batchLogCallback = LambdaCallback(on_batch_end=batchOutput)
 BATCH_SIZE = 64 # if you reduce batch size to 32 or 16 make sure to adjust epochs as necessary
 EPOCHS = 25
 
-# the teff branch
+# the neural network model
 input_data = Input(shape=(256,256,1))
 output_1 = Conv2D(32, (13,13), activation='relu', padding='same')(input_data)
 output_1 = MaxPooling2D(pool_size=(6, 6))(output_1)
