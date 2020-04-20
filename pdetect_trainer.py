@@ -57,7 +57,7 @@ output_1 = Conv2D(32, (3, 3), activation='relu', padding='same')(output_1)
 output_1 = MaxPooling2D(pool_size=(2, 2))(output_1)
 output_1 = Flatten()(output_1)
 output_1 = Dense(64, activation = 'relu')(output_1)
-output_1 = Dropout(0.5)(output_1)
+output_1 = Dropout(0.4)(output_1)
 pred = Dense(1, activation='sigmoid', name='prediction')(output_1)
 
 model = Model(inputs=input_data, outputs=pred)
