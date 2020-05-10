@@ -23,7 +23,9 @@ def augment_data_set(input_dir, output_dir):
 
     # initialize constants
     max_dim = 256
-    perturbations = ['resize']
+
+    # list the perturbations you would like to apply
+    perturbations = ['resize', 'noise', 'resize', 'brightness', 'flip']
 
     file_num = 0 # initialize current file number
     file_count = len([name for name in os.listdir(input_dir) if (os.path.isfile(input_dir + '/' + name) and ('.jpeg' in name or '.jpg' in name))])
@@ -119,15 +121,9 @@ def build_save_np_binary(input_dir, output_dir, output_prefix):
         image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
         if (('normal' in file) or ('NORMAL' in file) or (('bacteria' not in file) and ('virus' not in file))):
-<<<<<<< HEAD
             y_train.append(0)
         else:
             y_train.append(1)
-=======
-            y_train.append('normal')
-        else:
-            y_train.append('pneumonia')
->>>>>>> 35349a2aa2497bf6b581a2fb4c0823f3f2bb8bdf
 
         x_train.append(image)
 
@@ -142,10 +138,3 @@ def build_save_np_binary(input_dir, output_dir, output_prefix):
     
 
 
-#augment_data_set('/Volumes/Storage/chest_xray/chest_xray/test','/Volumes/Storage/chest_xray/chest_xray/test_resized')
-
-<<<<<<< HEAD
-build_save_np_binary('/Volumes/Storage/chest_xray/chest_xray/test_resized','/Volumes/Storage/chest_xray/chest_xray/test_resized/binaries','test')
-=======
-#build_save_np_binary('/Volumes/Storage/chest_xray/chest_xray/test_resized','/Volumes/Storage/chest_xray/chest_xray/test_resized/binaries','test')
->>>>>>> 35349a2aa2497bf6b581a2fb4c0823f3f2bb8bdf

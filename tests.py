@@ -2,7 +2,7 @@ import numpy as np
 import cv2
 from pdetect_perturbations import Perturbations as pb
 
-# Semi-automated tests
+# Semi-automated tests, results are inspected manually
 
 def test_pad_image():
     '''
@@ -86,6 +86,7 @@ def test_resize_image():
     resized_image = pb.pad_image(resized_image, 256, 256)
     cv2.imwrite('resized_padded_image' + '.jpg', resized_image)
 
+# call all of the tests
 test_adjust_brightness()
 test_rotate_image()
 test_sp_noise()
